@@ -44,6 +44,8 @@ pipewire
 pipewire-pulse
 wireplumber
 playerctl
+asahi-audio
+speakersafetyd
 
 # === Bluetooth ===
 bluez

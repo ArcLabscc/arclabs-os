@@ -15,6 +15,7 @@ config_services() {
         "cups.service"
         "tailscaled.service"
         "NetworkManager.service"
+        "speakersafetyd.service"
     )
 
     for service in "${system_services[@]}"; do

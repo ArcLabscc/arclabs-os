@@ -259,9 +259,10 @@ sudo asahi-fwextract
 ```
 
 ### No sound
-Check speaker safety daemon:
+Check speaker safety daemon and audio DSP:
 ```bash
-systemctl --user status speakersafetyd
+systemctl status speakersafetyd
+wpctl status
 ```
 
 ---
