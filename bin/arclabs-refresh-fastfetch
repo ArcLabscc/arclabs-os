@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Overwrite the user config for fastfetch with the ArcLabs default.
+
+arclabs-refresh-config fastfetch/config.jsonc

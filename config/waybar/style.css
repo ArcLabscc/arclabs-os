@@ -1,0 +1,113 @@
+@import "../arclabs-os/current/theme/waybar.css";
+
+* {
+  background-color: @background;
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.active {
+  color: @accent;
+  border-bottom: 2px solid @accent;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+#cpu,
+#memory,
+#temperature,
+#battery,
+#pulseaudio,
+#backlight,
+#network,
+#bluetooth,
+#custom-arclabs,
+#custom-screenrecording-indicator,
+#mpris,
+#privacy {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#custom-arclabs {
+  font-size: 16px;
+  color: @accent;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#custom-expand-icon {
+  margin-right: 20px;
+}
+
+tooltip {
+  padding: 2px;
+}
+
+#clock {
+  margin-left: 8.75px;
+  font-weight: 500;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#custom-screenrecording-indicator {
+  min-width: 12px;
+  margin-left: 8.75px;
+  font-size: 10px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+/* State colors */
+#memory.warning {
+  color: #e5c07b;
+}
+
+#memory.critical,
+#temperature.critical {
+  color: #e06c75;
+}
+
+#battery.warning {
+  color: #e5c07b;
+}
+
+#battery.critical {
+  color: #e06c75;
+}
+
+#mpris {
+  font-size: 11px;
+}
+
+#privacy-item {
+  color: #e06c75;
+}

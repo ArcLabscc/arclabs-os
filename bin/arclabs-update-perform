@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+# Ensure screensaver/sleep doesn't set in during updates
+hyprctl dispatch tagwindow +noidle &> /dev/null || true
+
+# Capture update logs
+exec > >(tee "/tmp/arclabs-update.log") 2>&1
+
+# Perform all update steps
+arclabs-update-time
+arclabs-update-keyring
+arclabs-update-available-reset
+arclabs-update-system-pkgs
+arclabs-migrate
+arclabs-hook post-update
+
+arclabs-update-analyze-logs
+
+arclabs-update-restart
+
+# Re-enable screensaver/sleep after updates
+hyprctl dispatch tagwindow -- -noidle &> /dev/null || true

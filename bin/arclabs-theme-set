@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  echo "Usage: arclabs-theme-set <theme-name>"
+  exit 1
+fi
+
+CURRENT_THEME_PATH="$HOME/.config/arclabs-os/current/theme"
+NEXT_THEME_PATH="$HOME/.config/arclabs-os/current/next-theme"
+USER_THEMES_PATH="$HOME/.config/arclabs-os/themes"
+ARCLABS_THEMES_PATH="$ARCLABS_PATH/themes"
+
+THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+
+if [[ -d "$USER_THEMES_PATH/$THEME_NAME" ]]; then
+  THEME_PATH="$USER_THEMES_PATH/$THEME_NAME"
+elif [[ -d "$ARCLABS_THEMES_PATH/$THEME_NAME" ]]; then
+  THEME_PATH="$ARCLABS_THEMES_PATH/$THEME_NAME"
+else
+  echo "Theme '$THEME_NAME' does not exist"
+  exit 1
+fi
+
+# Setup clean next theme directory (for atomic theme config swapping)
+rm -rf "$NEXT_THEME_PATH"
+mkdir -p "$NEXT_THEME_PATH"
+
+# Copy static configs
+cp -r "$THEME_PATH/"* "$NEXT_THEME_PATH/" 2>/dev/null
+
+# Generate dynamic configs
+arclabs-theme-set-templates
+
+# Swap next theme in as current
+rm -rf "$CURRENT_THEME_PATH"
+mv "$NEXT_THEME_PATH" "$CURRENT_THEME_PATH"
+
+# Store theme name for reference
+echo "$THEME_NAME" > "$HOME/.config/arclabs-os/current/theme.name"
+
+# Change background with theme
+arclabs-theme-bg-next
+
+# Restart components to apply new theme
+if pgrep -x waybar >/dev/null; then
+  arclabs-restart-waybar
+fi
+arclabs-restart-swayosd
+arclabs-restart-terminal
+arclabs-restart-hyprctl
+arclabs-restart-btop
+arclabs-restart-opencode
+arclabs-restart-mako
+
+# Change app-specific themes
+arclabs-theme-set-gnome
+arclabs-theme-set-browser
+arclabs-theme-set-vscode
+arclabs-theme-set-obsidian
+
+# Call hook on theme set
+arclabs-hook theme-set "$THEME_NAME"

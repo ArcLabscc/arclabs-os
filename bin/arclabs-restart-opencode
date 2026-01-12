@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Reload opencode configuration (used by the ArcLabs theme switching).
+
+killall -SIGUSR2 opencode

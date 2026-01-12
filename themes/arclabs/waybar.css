@@ -1,0 +1,54 @@
+/* ArcLabs Waybar Theme */
+@define-color foreground #00ff99;
+@define-color background #0a0a0a;
+@define-color accent #00ff99;
+@define-color surface #1a1a1a;
+@define-color overlay #555555;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.85);
+    color: @foreground;
+}
+
+#workspaces button {
+    color: @overlay;
+    padding: 0 8px;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: @accent;
+    border-bottom: 2px solid @accent;
+}
+
+#workspaces button:hover {
+    background: alpha(@accent, 0.2);
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray, #custom-power {
+    padding: 0 12px;
+    color: @foreground;
+}
+
+#battery.charging {
+    color: @accent;
+}
+
+#battery.warning {
+    color: #ffff55;
+}
+
+#battery.critical {
+    color: #ff5555;
+}
+
+#pulseaudio.muted {
+    color: @overlay;
+}

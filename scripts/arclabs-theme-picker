@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# ArcLabs Theme Picker
+# Interactive theme selector using walker/rofi/fzf
+#
+
+THEMES_DIR="${ARCLABS_PATH:-$HOME/.local/share/arclabs-os}/themes"
+
+# Get list of themes
+get_themes() {
+    for theme_dir in "$THEMES_DIR"/*/; do
+        if [[ -d "$theme_dir" ]] && [[ -f "$theme_dir/colors.toml" ]]; then
+            basename "$theme_dir"
+        fi
+    done
+}
+
+# Get current theme
+get_current() {
+    if [[ -L "$HOME/.config/arclabs-os/current/theme" ]]; then
+        basename "$(readlink "$HOME/.config/arclabs-os/current/theme")"
+    fi
+}
+
+current=$(get_current)
+themes=$(get_themes)
+
+# Try walker first, then rofi, then fzf, then dmenu
+if command -v walker &> /dev/null; then
+    selected=$(echo "$themes" | walker --dmenu -p "Theme" -q "$current")
+elif command -v rofi &> /dev/null; then
+    selected=$(echo "$themes" | rofi -dmenu -p "Theme" -select "$current")
+elif command -v fzf &> /dev/null; then
+    selected=$(echo "$themes" | fzf --prompt="Theme: " --query="$current")
+elif command -v dmenu &> /dev/null; then
+    selected=$(echo "$themes" | dmenu -p "Theme:")
+else
+    echo "No menu program found (walker, rofi, fzf, or dmenu)"
+    exit 1
+fi
+
+# Apply selected theme
+if [[ -n "$selected" ]]; then
+    arclabs-theme "$selected"
+fi

@@ -1,0 +1,34 @@
+# ArcLabs Theme - Cyber Green
+
+# Login theme
+sddm_theme = "arclabs"
+
+# Desktop theming
+gtk_theme = "Adwaita-dark"
+icon_theme = "Adwaita"
+cursor_theme = "capitaine-cursors"
+
+# Terminal colors
+accent = "#00ff99"
+cursor = "#00ff99"
+foreground = "#e0e0e0"
+background = "#0a0a0a"
+selection_foreground = "#0a0a0a"
+selection_background = "#00ff99"
+
+color0 = "#0a0a0a"
+color1 = "#ff5555"
+color2 = "#00ff99"
+color3 = "#ffff55"
+color4 = "#5555ff"
+color5 = "#ff55ff"
+color6 = "#55ffff"
+color7 = "#e0e0e0"
+color8 = "#555555"
+color9 = "#ff6666"
+color10 = "#33ffaa"
+color11 = "#ffff77"
+color12 = "#7777ff"
+color13 = "#ff77ff"
+color14 = "#77ffff"
+color15 = "#ffffff"

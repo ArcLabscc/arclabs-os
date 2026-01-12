@@ -1,0 +1,16 @@
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Local overrides
+config/hypr/local.conf
+*.local
+
+# Cache
+.cache/
+__pycache__/

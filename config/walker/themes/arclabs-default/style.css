@@ -1,0 +1,162 @@
+/* ArcLabs Glassmorphism Theme for Walker */
+
+* {
+  all: unset;
+}
+
+* {
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-size: 15px;
+  color: #e0e0e0;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.normal-icons {
+  -gtk-icon-size: 18px;
+}
+
+.large-icons {
+  -gtk-icon-size: 36px;
+}
+
+/* Main container - glassmorphism effect */
+.box-wrapper {
+  background: rgba(20, 20, 25, 0.65);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.preview-box {
+}
+
+.box {
+}
+
+/* Search input area */
+.search-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.input placeholder {
+  opacity: 0.4;
+  color: #888;
+}
+
+.input {
+  font-size: 16px;
+  color: #fff;
+}
+
+.input:focus,
+.input:active {
+  box-shadow: none;
+  outline: none;
+}
+
+.content-container {
+  margin-top: 8px;
+}
+
+.placeholder {
+  color: #666;
+  padding: 20px;
+}
+
+.scroll {
+}
+
+.list {
+}
+
+child,
+child > * {
+  border-radius: 10px;
+  transition: background 150ms ease;
+}
+
+child:hover .item-box {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+child:selected .item-box {
+  background: rgba(0, 255, 153, 0.15);
+  border-left: 2px solid #00ff99;
+}
+
+child:selected .item-box * {
+  color: #fff;
+}
+
+.item-box {
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin: 2px 0;
+}
+
+.item-text-box {
+  all: unset;
+  padding: 4px 0;
+}
+
+.item-text {
+  font-weight: 500;
+}
+
+.item-subtext {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.item-image {
+  margin-right: 14px;
+  -gtk-icon-transform: scale(1);
+  opacity: 0.9;
+}
+
+.current {
+  font-style: italic;
+  color: #00ff99;
+}
+
+/* Keybind hints at bottom */
+.keybinds {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 14px;
+  margin-top: 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+.keybind-hint {
+  color: #888;
+}
+
+.keybind-key {
+  color: #00ff99;
+  font-weight: 600;
+}
+
+.preview {
+}
+
+.elephant-hint {
+  color: #555;
+  font-style: italic;
+}
+
+.error {
+  color: #ff6b6b;
+  padding: 10px;
+}

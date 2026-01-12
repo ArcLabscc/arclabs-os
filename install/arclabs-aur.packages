@@ -1,0 +1,40 @@
+# ArcLabs OS - AUR Packages
+# These require yay, paru, or another AUR helper
+
+# === App Launcher ===
+walker
+
+# === Elephant (Walker Plugins) ===
+elephant
+elephant-desktopapplications
+elephant-clipboard
+elephant-calc
+elephant-runner
+elephant-websearch
+elephant-unicode
+elephant-files
+
+# === OSD ===
+swayosd-git
+
+# === Fonts ===
+ttf-jetbrains-mono-nerd
+
+# === Dev Tools ===
+lazygit
+lazydocker
+mise
+gum
+yay
+
+# === Screensaver ===
+python-terminaltexteffects
+
+# === Screenshot ===
+wayfreeze-git
+
+# === TUI Tools ===
+bluetuith-bin
+
+# === Login Theme ===
+catppuccin-sddm-theme-mocha

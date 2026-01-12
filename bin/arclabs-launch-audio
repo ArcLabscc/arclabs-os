@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Launch the ArcLabs audio controls TUI (provided by wiremix).
+
+arclabs-launch-or-focus-tui wiremix

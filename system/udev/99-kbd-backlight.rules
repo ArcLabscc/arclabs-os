@@ -1,0 +1,5 @@
+# Allow users to control keyboard backlight
+SUBSYSTEM=="leds", KERNEL=="kbd_backlight", ACTION=="add", RUN+="/bin/chmod 666 /sys/class/leds/kbd_backlight/brightness"
+
+# Restore keyboard backlight on boot
+SUBSYSTEM=="leds", KERNEL=="kbd_backlight", ACTION=="add", RUN+="/bin/sh -c 'echo 128 > /sys/class/leds/kbd_backlight/brightness'"

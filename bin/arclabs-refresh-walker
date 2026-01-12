@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Overwrite the user configs for the Walker application launcher (which also powers the ArcLabs Menu) and restart the services.
+
+# Ensure walker is set to autostart
+mkdir -p ~/.config/autostart/
+cp $ARCLABS_PATH/default/walker/walker.desktop ~/.config/autostart/
+systemctl --user daemon-reload
+
+arclabs-refresh-config walker/config.toml
+arclabs-refresh-config elephant/calc.toml
+arclabs-refresh-config elephant/desktopapplications.toml
+arclabs-restart-walker

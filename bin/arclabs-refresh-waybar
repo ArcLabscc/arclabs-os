@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Overwrite the user configs for the Waybar menu bar with the ArcLabs defaults and restart the service.
+
+arclabs-refresh-config waybar/config.jsonc
+arclabs-refresh-config waybar/style.css
+arclabs-restart-waybar

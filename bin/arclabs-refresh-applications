@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Ensure all default .desktop, web apps, and TUIs are installed.
+
+# Copy and sync icon files
+mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
+cp ~/.local/share/arclabs-os/applications/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
+gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
+
+# Copy .desktop declarations
+mkdir -p ~/.local/share/applications
+cp ~/.local/share/arclabs-os/applications/*.desktop ~/.local/share/applications/
+cp ~/.local/share/arclabs-os/applications/hidden/*.desktop ~/.local/share/applications/
+
+# Refresh the webapps and TUIs
+bash $ARCLABS_PATH/install/packaging/icons.sh
+bash $ARCLABS_PATH/install/packaging/webapps.sh
+bash $ARCLABS_PATH/install/packaging/tuis.sh
+
+update-desktop-database ~/.local/share/applications

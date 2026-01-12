@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=ArcLabs OS
+Description=ArcLabs OS login theme - ARM64 Linux for Apple Silicon
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/ArcLabscc/arclabs-os
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations

@@ -1,0 +1,184 @@
+#!/bin/bash
+#
+# ArcLabs Theme Switcher
+# Switches desktop theme and updates SDDM login screen
+#
+# Usage: arclabs-theme [theme-name]
+#        arclabs-theme --list
+#        arclabs-theme --current
+#
+
+set -euo pipefail
+
+THEMES_DIR="${ARCLABS_PATH:-$HOME/.local/share/arclabs-os}/themes"
+CONFIG_DIR="$HOME/.config/arclabs-os"
+CURRENT_DIR="$CONFIG_DIR/current"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+info() { echo -e "${BLUE}::${NC} $1"; }
+success() { echo -e "${GREEN}::${NC} $1"; }
+warn() { echo -e "${YELLOW}::${NC} $1"; }
+error() { echo -e "${RED}::${NC} $1" >&2; }
+
+# Parse TOML value (simple key = "value" format)
+get_toml_value() {
+    local file="$1"
+    local key="$2"
+    grep "^${key}" "$file" 2>/dev/null | sed 's/.*= *"\([^"]*\)".*/\1/' | head -1
+}
+
+list_themes() {
+    info "Available themes:"
+    for theme_dir in "$THEMES_DIR"/*/; do
+        if [[ -d "$theme_dir" ]] && [[ -f "$theme_dir/colors.toml" ]]; then
+            local name=$(basename "$theme_dir")
+            local current=""
+            if [[ -L "$CURRENT_DIR/theme" ]] && [[ "$(readlink "$CURRENT_DIR/theme")" == *"$name" ]]; then
+                current=" ${GREEN}(active)${NC}"
+            fi
+            echo -e "  - $name$current"
+        fi
+    done
+}
+
+show_current() {
+    if [[ -L "$CURRENT_DIR/theme" ]]; then
+        local current=$(basename "$(readlink "$CURRENT_DIR/theme")")
+        echo "$current"
+    else
+        echo "none"
+    fi
+}
+
+apply_theme() {
+    local theme_name="$1"
+    local theme_path="$THEMES_DIR/$theme_name"
+    local colors_file="$theme_path/colors.toml"
+
+    # Validate theme exists
+    if [[ ! -d "$theme_path" ]]; then
+        error "Theme not found: $theme_name"
+        info "Use 'arclabs-theme --list' to see available themes"
+        exit 1
+    fi
+
+    if [[ ! -f "$colors_file" ]]; then
+        error "Theme missing colors.toml: $theme_name"
+        exit 1
+    fi
+
+    info "Applying theme: $theme_name"
+
+    # Create config directories
+    mkdir -p "$CURRENT_DIR"
+
+    # Update theme symlink
+    ln -sfn "$theme_path" "$CURRENT_DIR/theme"
+    success "Theme symlink updated"
+
+    # Read theme settings
+    local sddm_theme=$(get_toml_value "$colors_file" "sddm_theme")
+    local gtk_theme=$(get_toml_value "$colors_file" "gtk_theme")
+    local icon_theme=$(get_toml_value "$colors_file" "icon_theme")
+    local cursor_theme=$(get_toml_value "$colors_file" "cursor_theme")
+
+    # Apply SDDM theme (requires sudo)
+    if [[ -n "$sddm_theme" ]]; then
+        info "Setting SDDM login theme: $sddm_theme"
+        if [[ -d "/usr/share/sddm/themes/$sddm_theme" ]]; then
+            sudo tee /etc/sddm.conf.d/theme.conf > /dev/null << EOF
+[Theme]
+Current=$sddm_theme
+CursorTheme=${cursor_theme:-capitaine-cursors}
+
+[General]
+InputMethod=
+EOF
+            success "SDDM theme updated (effective next login)"
+        else
+            warn "SDDM theme not installed: $sddm_theme"
+            warn "Install with: yay -S catppuccin-sddm-theme-mocha"
+        fi
+    fi
+
+    # Apply GTK theme
+    if [[ -n "$gtk_theme" ]]; then
+        gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme" 2>/dev/null || true
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
+        success "GTK theme: $gtk_theme"
+    fi
+
+    # Apply icon theme
+    if [[ -n "$icon_theme" ]]; then
+        gsettings set org.gnome.desktop.interface icon-theme "$icon_theme" 2>/dev/null || true
+        success "Icon theme: $icon_theme"
+    fi
+
+    # Apply cursor theme
+    if [[ -n "$cursor_theme" ]]; then
+        gsettings set org.gnome.desktop.interface cursor-theme "$cursor_theme" 2>/dev/null || true
+        # Also set for Hyprland
+        hyprctl setcursor "$cursor_theme" 24 2>/dev/null || true
+        success "Cursor theme: $cursor_theme"
+    fi
+
+    # Apply theme-specific configs if they exist
+    if [[ -f "$theme_path/hyprland.conf" ]]; then
+        # Hyprland will source this via the theme symlink
+        hyprctl reload 2>/dev/null || true
+        success "Hyprland config reloaded"
+    fi
+
+    if [[ -f "$theme_path/waybar.css" ]]; then
+        # Waybar will pick up via symlink if configured
+        pkill -SIGUSR2 waybar 2>/dev/null || true
+        success "Waybar styles reloaded"
+    fi
+
+    # Set first background if none selected
+    if [[ ! -L "$CURRENT_DIR/background" ]] && [[ -d "$theme_path/backgrounds" ]]; then
+        local first_bg=$(ls -1 "$theme_path/backgrounds" 2>/dev/null | head -1)
+        if [[ -n "$first_bg" ]]; then
+            ln -sfn "$theme_path/backgrounds/$first_bg" "$CURRENT_DIR/background"
+            success "Background set: $first_bg"
+        fi
+    fi
+
+    echo ""
+    success "Theme '$theme_name' applied!"
+    info "SDDM changes take effect on next login"
+}
+
+# Main
+case "${1:-}" in
+    --list|-l)
+        list_themes
+        ;;
+    --current|-c)
+        show_current
+        ;;
+    --help|-h)
+        echo "ArcLabs Theme Switcher"
+        echo ""
+        echo "Usage:"
+        echo "  arclabs-theme [theme-name]  Apply a theme"
+        echo "  arclabs-theme --list        List available themes"
+        echo "  arclabs-theme --current     Show current theme"
+        echo "  arclabs-theme --help        Show this help"
+        ;;
+    "")
+        error "No theme specified"
+        echo ""
+        list_themes
+        exit 1
+        ;;
+    *)
+        apply_theme "$1"
+        ;;
+esac

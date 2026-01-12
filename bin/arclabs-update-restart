@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ "$(uname -r | sed 's/-arch/\.arch/')" != "$(pacman -Q linux | awk '{print $2}')" ]; then
+  gum confirm "Linux kernel has been updated. Reboot?" && arclabs-cmd-reboot
+
+elif [ -f "$HOME/.local/state/arclabs-os/reboot-required" ]; then
+  gum confirm "Updates require reboot. Ready?" && arclabs-cmd-reboot
+fi
+
+for file in "$HOME"/.local/state/arclabs-os/restart-*-required; do
+  if [ -f "$file" ]; then
+    filename=$(basename "$file")
+    service=$(echo "$filename" | sed 's/restart-\(.*\)-required/\1/')
+    echo "Restarting $service"
+    arclabs-state clear "$filename"
+    arclabs-restart-"$service"
+  fi
+done

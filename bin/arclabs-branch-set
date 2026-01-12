@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Set the branch for ArcLabs's git repository.
+
+if (($# == 0)); then
+  echo "Usage: arclabs-branch-set [master|dev]"
+  exit 1
+else
+  branch="$1"
+fi
+
+case "$branch" in
+  "master") git -C $ARCLABS_PATH switch master ;;
+  "dev") git -C $ARCLABS_PATH switch dev ;;
+  *) echo "Unknown branch: $branch"; exit 1; ;;
+esac

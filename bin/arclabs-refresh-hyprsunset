@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Overwrite the user config for hyprsunset with the ArcLabs default and restart the service.
+#
+arclabs-refresh-config hypr/hyprsunset.conf
+arclabs-restart-hyprsunset

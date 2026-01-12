@@ -1,0 +1,203 @@
+# ArcLabs OS - Base Packages (Pacman)
+# Organized by category for clarity
+
+# === Keyrings ===
+archlinuxarm-keyring
+asahi-alarm-keyring
+
+# === Core System ===
+base
+base-devel
+linux-asahi
+linux-firmware
+sudo
+which
+
+# === Asahi Linux Specific ===
+asahi-meta
+asahi-scripts
+asahi-fwextract
+m1n1
+uboot-asahi
+
+# === Boot & Init ===
+grub
+plymouth
+
+# === Networking ===
+networkmanager
+iwd
+dhcpcd
+netctl
+net-tools
+openssh
+tailscale
+nmap
+arp-scan
+avahi
+nss-mdns
+inetutils
+whois
+
+# === Audio ===
+pipewire
+pipewire-pulse
+wireplumber
+playerctl
+
+# === Bluetooth ===
+bluez
+bluez-utils
+
+# === Desktop Environment ===
+hyprland
+hypridle
+hyprlock
+hyprpaper
+hyprpicker
+hyprsunset
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+xdg-terminal-exec
+
+# === Session Management ===
+uwsm
+sddm
+polkit-gnome
+
+# === Wayland Support ===
+qt5-wayland
+qt6-wayland
+
+# === Status Bar & Notifications ===
+waybar
+mako
+libnotify
+swayosd
+
+# === Background & Wallpaper ===
+swaybg
+
+# === Clipboard ===
+wl-clipboard
+cliphist
+
+# === Brightness & Volume ===
+brightnessctl
+pamixer
+
+# === Terminal ===
+kitty
+alacritty
+
+# === File Manager ===
+nautilus
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+
+# === Browser ===
+firefox
+
+# === Desktop Apps ===
+evince
+gnome-calculator
+gnome-disk-utility
+gnome-keyring
+gnome-themes-extra
+imv
+mpv
+pinta
+libsecret
+
+# === Editors ===
+helix
+neovim
+vim
+vi
+nano
+
+# === Development ===
+git
+go
+github-cli
+rust
+ruby
+clang
+llvm
+luarocks
+
+# === Containers ===
+docker
+docker-buildx
+docker-compose
+
+# === System Monitoring ===
+btop
+fastfetch
+
+# === Utilities ===
+jq
+yq
+man-db
+less
+unzip
+expac
+plocate
+inxi
+
+# === CLI Tools ===
+bat
+eza
+fd
+fzf
+ripgrep
+dust
+zoxide
+tldr
+tree-sitter-cli
+bash-completion
+
+# === Screenshot & Recording ===
+grim
+slurp
+satty
+imagemagick
+
+# === System ===
+ufw
+power-profiles-daemon
+cups
+cups-browsed
+cups-filters
+cups-pdf
+exfatprogs
+ffmpegthumbnailer
+fontconfig
+
+# === Fonts ===
+ttf-cascadia-mono-nerd
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+
+# === Shells ===
+fish
+starship
+
+# === Theming ===
+kvantum
+capitaine-cursors
+
+# === Flatpak (Optional) ===
+flatpak
+
+# === TUI Tools ===
+impala
+pulsemixer
+
+# === GUI Fallbacks ===
+pavucontrol
+blueman
+

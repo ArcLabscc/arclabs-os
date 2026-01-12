@@ -1,0 +1,11 @@
+[Plymouth Theme]
+Name=ArcLabs
+Description=ArcLabs OS boot splash - ARM64 Linux for Apple Silicon
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/arclabs
+ScriptFile=/usr/share/plymouth/themes/arclabs/arclabs.script
+ConsoleLogBackgroundColor=0x0d1117
+MonospaceFont=JetBrains Mono 11
+Font=JetBrains Mono 11

@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+# Overwrite all user configs with the ArcLabs defaults.
+
+if [ "$EUID" -eq 0 ]; then
+  echo "Error: This script should not be run as root"
+  exit 1
+fi
+
+echo "Resetting all ArcLabs configs"
+cp -R ~/.local/share/arclabs-os/config/* ~/.config/
+cp ~/.local/share/arclabs-os/default/bashrc ~/.bashrc
+echo '[[ -f ~/.bashrc ]] && . ~/.bashrc' | tee ~/.bash_profile >/dev/null
+
+$(bash $ARCLABS_PATH/install/config/theme.sh)
+
+arclabs-refresh-limine
+arclabs-refresh-plymouth
+arclabs-nvim-setup

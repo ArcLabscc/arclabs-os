@@ -1,0 +1,34 @@
+/* Hackerman theme for Waybar */
+@define-color background #0B0C16;
+@define-color foreground #ddf7ff;
+@define-color accent #82FB9C;
+@define-color surface #1a1b26;
+@define-color overlay #6a6e95;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.9);
+    color: @foreground;
+}
+
+#workspaces button {
+    color: @overlay;
+    padding: 0 5px;
+}
+
+#workspaces button.active {
+    color: @accent;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray {
+    padding: 0 10px;
+    color: @foreground;
+}
+
+#battery.charging {
+    color: @accent;
+}

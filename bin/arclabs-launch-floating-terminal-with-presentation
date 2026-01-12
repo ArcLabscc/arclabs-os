@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Launch a floating terminal with the ArcLabs logo presentation, then execute the command passed in, and finally end with the arclabs-show-done presentation.
+# Used by actions such as Update System.
+
+cmd="$*"
+exec setsid uwsm-app -- xdg-terminal-exec --app-id=org.arclabs.terminal --title=ArcLabs -e bash -c "arclabs-show-logo; $cmd; if [ \$? -ne 130 ]; then arclabs-show-done; fi"

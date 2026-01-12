@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+# Reinstall the ArcLabs configuration directory from the git source.
+
+git clone "https://github.com/basecamp/arclabs-os.git" ~/.local/share/arclabs-new >/dev/null
+mv $ARCLABS_PATH ~/.local/share/arclabs-old
+mv ~/.local/share/arclabs-new $ARCLABS_PATH

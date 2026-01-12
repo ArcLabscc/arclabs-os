@@ -1,0 +1,78 @@
+name = "arclabsthemes"
+name_pretty = "Themes"
+icon = "preferences-desktop-theme"
+
+[[entries]]
+text = "ArcLabs (Default)"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme arclabs" }
+
+[[entries]]
+text = "Catppuccin"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme catppuccin" }
+
+[[entries]]
+text = "Catppuccin Latte"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme catppuccin-latte" }
+
+[[entries]]
+text = "Ethereal"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme ethereal" }
+
+[[entries]]
+text = "Everforest"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme everforest" }
+
+[[entries]]
+text = "Flexoki Light"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme flexoki-light" }
+
+[[entries]]
+text = "Gruvbox"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme gruvbox" }
+
+[[entries]]
+text = "Hackerman"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme hackerman" }
+
+[[entries]]
+text = "Kanagawa"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme kanagawa" }
+
+[[entries]]
+text = "Matte Black"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme matte-black" }
+
+[[entries]]
+text = "Nord"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme nord" }
+
+[[entries]]
+text = "Osaka Jade"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme osaka-jade" }
+
+[[entries]]
+text = "Ristretto"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme ristretto" }
+
+[[entries]]
+text = "Rose Pine"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme rose-pine" }
+
+[[entries]]
+text = "Tokyo Night"
+icon = "preferences-desktop-theme"
+actions = { "apply" = "arclabs-theme tokyo-night" }

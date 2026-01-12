@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Overwrite the user configs for swayosd (controls on-screen feedback for changing volume/songs etc) with the ArcLabs defaults and restart the service.
+
+arclabs-refresh-config swayosd/config.toml
+arclabs-refresh-config swayosd/style.css
+arclabs-restart-swayosd

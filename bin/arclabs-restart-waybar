@@ -1,0 +1,3 @@
+#!/bin/bash
+
+arclabs-restart-app waybar
